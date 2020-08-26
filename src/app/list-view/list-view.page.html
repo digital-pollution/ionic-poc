@@ -1,0 +1,40 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>List View</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+  <ion-card id="shift-list">
+    <ion-card-header>
+      <ion-card-subtitle>Your assigned shifts</ion-card-subtitle>
+      <ion-card-title>Manage your shifts</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-reorder-group disabled="false">
+        <ion-item *ngFor="let shift of shifts" lines="none" lines="full">
+          <ion-label class="ion-text-wrap">
+            <ion-text color="primary">
+              <h3>location: {{ shift.location }}</h3>
+              <small>id: {{ shift.id }}</small><br />
+              <small *ngFor="let task of shift.tasks">
+                {{ task.name }} - {{ task.description }}
+              </small>
+            </ion-text>
+          </ion-label>
+          <ion-button fill="clear" color="primary" (click)="presentModal(shift)" icon-only slot="end">
+            <ion-icon name="help-circle"></ion-icon>
+          </ion-button>
+          <ion-button fill="clear" color="primary" (click)="showActions(shift)" icon-only slot="end">
+            <ion-icon name="settings"></ion-icon>  
+          </ion-button>
+        </ion-item>
+      </ion-reorder-group>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

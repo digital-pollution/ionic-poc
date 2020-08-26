@@ -1,0 +1,16 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Push / Local Notifications</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-fab-button (click)="sendNotification()" style="display: block; margin: 24px auto;">
+    <ion-icon name="alert-circle"></ion-icon>
+  </ion-fab-button>
+
+</ion-content>

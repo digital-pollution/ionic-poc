@@ -1,0 +1,48 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Geolocation Demo</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div style="display: flex; margin: 24px 0; justify-content: space-evenly;">
+    <ion-fab-button>
+      <ion-icon name="play" (click)="startWatch()"></ion-icon>    
+    </ion-fab-button>
+    <ion-fab-button>
+      <ion-icon name="navigate-circle" (click)="getCurrentPosition()"></ion-icon>    
+    </ion-fab-button>
+    <ion-fab-button color="danger">
+      <ion-icon name="stop" (click)="stopWatch()"></ion-icon>    
+    </ion-fab-button>
+  </div>
+
+
+  <div *ngIf="currentPos">
+    <ion-label>Current Position:</ion-label>
+    <div>
+      <p><strong>lat: </strong> {{ currentPos.coords.latitude }}</p>
+      <p><strong>lng: </strong> {{ currentPos.coords.longitude }}</p>
+      <p><strong>accuracy: </strong> {{ currentPos.coords.accuracy }}</p>
+      <p><strong>timestamp: </strong> {{ currentPos.timestamp }}</p>
+  </div>
+  </div>
+
+  <ng-container *ngIf="posWatch">
+    <ion-label>Position History:</ion-label>
+    
+      <div *ngFor="let pos of posWatch">
+          <p><strong>lat: </strong> {{ pos.coords.latitude }}</p>
+          <p><strong>lng: </strong> {{ pos.coords.longitude }}</p>
+          <p><strong>accuracy: </strong> {{ pos.coords.accuracy }}</p>
+          <p><strong>timestamp: </strong> {{ pos.timestamp }}</p>
+      </div>
+      <hr />
+
+  </ng-container>
+
+
+</ion-content>

@@ -1,0 +1,185 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Form Controls</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card id="forms">
+    <ion-card-header>
+      <ion-card-subtitle>Form Controls</ion-card-subtitle>
+      <ion-card-title>Example common form controls</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list lines="full" class="ion-no-margin">
+        <ion-list-header lines="inset">
+          <ion-label>
+            Label Positions
+          </ion-label>
+        </ion-list-header>
+        <ion-item>
+          <ion-label>Default Label</ion-label>
+          <ion-input placeholder="placeholder"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="fixed">Fixed Label</ion-label>
+          <ion-input placeholder="placeholder"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked">Stacked Label</ion-label>
+          <ion-input placeholder="placeholder"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Floating Label</ion-label>
+          <ion-input></ion-input>
+        </ion-item>
+      </ion-list>
+
+      <ion-list lines="inset" class="ion-no-margin">
+        <ion-list-header lines="inset">
+          <ion-label>
+            Input Types
+          </ion-label>
+        </ion-list-header>
+
+        <ion-item>
+          <ion-label>Text Input</ion-label>
+          <ion-input placeholder="placeholder" type="text"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>Textarea Input</ion-label>
+          <ion-textarea rows="6" cols="20" placeholder="Enter any notes here..."></ion-textarea>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>D MMM YYYY H:mm</ion-label>
+          <ion-datetime displayFormat="D MMM YYYY H:mm" min="1997" max="2010" value="2005-06-17T11:06Z"></ion-datetime>
+        </ion-item>
+        
+        <ion-item>
+          <ion-label>DDDD MMM D, YYYY</ion-label>
+          <ion-datetime displayFormat="DDDD MMM D, YYYY" min="2005" max="2016" value="2008-09-02"></ion-datetime>
+        </ion-item>
+        
+        <ion-item>
+          <ion-label>HH:mm</ion-label>
+          <ion-datetime displayFormat="HH:mm"></ion-datetime>
+        </ion-item>
+
+        <ion-radio-group>
+          <ion-list-header>
+            <ion-label>
+              Radio Group
+            </ion-label>
+          </ion-list-header>
+      
+          <ion-item>
+            <ion-label>Option 1</ion-label>
+            <ion-radio value="1"></ion-radio>
+          </ion-item>
+      
+          <ion-item>
+            <ion-label>Option 2</ion-label>
+            <ion-radio value="2"></ion-radio>
+          </ion-item>
+      
+          <ion-item>
+            <ion-label>Option 3</ion-label>
+            <ion-radio value="3"></ion-radio>
+          </ion-item>
+      
+          <ion-item>
+            <ion-label>Option 4</ion-label>
+            <ion-radio value="4"></ion-radio>
+          </ion-item>
+      
+          <ion-item>
+            <ion-label>Option 5</ion-label>
+            <ion-radio value="5"></ion-radio>
+          </ion-item>
+        </ion-radio-group>
+
+
+        <ion-item>
+          <ion-label position="stacked">Range Inputs</ion-label>
+
+          <ion-range color="danger" pin="true"></ion-range>
+        </ion-item>
+      
+        <ion-item>
+          <ion-range min="-200" max="200" color="secondary">
+            <ion-label slot="start">-200</ion-label>
+            <ion-label slot="end">200</ion-label>
+          </ion-range>
+        </ion-item>
+      
+        <ion-item>
+          <ion-range min="20" max="80" step="2">
+            <ion-icon size="small" slot="start" name="sunny"></ion-icon>
+            <ion-icon slot="end" name="sunny"></ion-icon>
+          </ion-range>
+        </ion-item>
+      
+        <ion-item>
+          <ion-range min="1000" max="2000" step="100" snaps="true" color="secondary"></ion-range>
+        </ion-item>
+      
+        <ion-item>
+          <ion-range min="1000" max="2000" step="100" snaps="true" ticks="false" color="secondary"></ion-range>
+        </ion-item>
+      
+        <ion-item>
+          <ion-range dualKnobs="true" min="21" max="72" step="3" snaps="true"></ion-range>
+        </ion-item>
+
+
+
+        <ion-item>
+          <ion-label position="stacked">Select input</ion-label>
+          <ion-select value="12">
+            <ion-select-option value="01">January</ion-select-option>
+            <ion-select-option value="02">February</ion-select-option>
+            <ion-select-option value="03">March</ion-select-option>
+            <ion-select-option value="04">April</ion-select-option>
+            <ion-select-option value="05">May</ion-select-option>
+            <ion-select-option value="06">June</ion-select-option>
+            <ion-select-option value="07">July</ion-select-option>
+            <ion-select-option value="08">August</ion-select-option>
+            <ion-select-option value="09">September</ion-select-option>
+            <ion-select-option value="10">October</ion-select-option>
+            <ion-select-option value="11">November</ion-select-option>
+            <ion-select-option value="12">December</ion-select-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="stacked">Number Input</ion-label>
+          <ion-input placeholder="placeholder" type="number"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="stacked">Password Input</ion-label>
+          <ion-input placeholder="placeholder" type="password"></ion-input>
+        </ion-item>
+
+        <ion-item position="stacked">
+          <ion-label position="stacked">Multiple Inputs</ion-label>
+          <ion-input placeholder="Address Line 1"></ion-input>
+          <ion-input placeholder="Address Line 2"></ion-input>
+          <ion-input placeholder="City"></ion-input>
+          <ion-input placeholder="State"></ion-input>
+          <ion-input placeholder="Zip Code"></ion-input>
+        </ion-item>
+
+        <ion-item position="stacked">
+          <ion-label position="stacked">Textarea</ion-label>
+          <ion-textarea placeholder="placeholder"></ion-textarea>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
