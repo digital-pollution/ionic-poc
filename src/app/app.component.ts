@@ -10,6 +10,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
   styleUrls: ['app.component.scss']
 })
 export class AppComponent implements OnInit {
+  public dark = false;
   public selectedIndex = 0;
   public appPages = [
     {
@@ -56,6 +57,18 @@ export class AppComponent implements OnInit {
     private statusBar: StatusBar
   ) {
     this.initializeApp();
+
+    const prefersColor = window.matchMedia('(prefers-color-scheme: dark)');
+    this.dark = prefersColor.matches;
+    this.updateDarkMode();
+
+    prefersColor.addEventListener(
+      'change',
+      mediaQuery => {
+        this.dark = mediaQuery.matches;
+        this.updateDarkMode();
+      }
+    );
   }
 
   initializeApp() {
@@ -69,6 +82,29 @@ export class AppComponent implements OnInit {
     const path = window.location.pathname.split('folder/')[1];
     if (path !== undefined) {
       this.selectedIndex = this.appPages.findIndex(page => page.title.toLowerCase() === path.toLowerCase());
+    }
+  }
+
+  updateDarkMode() {
+    document.body.classList.toggle('dark', this.dark);
+  }
+
+  // toggleTheme(event) {
+  //   if (event.detail.checked) {
+  //     document.body.setAttribute('data-theme', 'dark');
+  //     document.body.setAttribute('class', 'dark');
+  //   }
+  //   else {
+  //     document.body.setAttribute('data-theme', 'light');
+  //     document.body.removeAttribute('class');
+  //   }
+  // }
+
+  colorTest(systemInitiatedDark) {
+    if (systemInitiatedDark.matches) {
+      document.body.setAttribute('data-theme', 'dark');		
+    } else {
+      document.body.setAttribute('data-theme', 'light');
     }
   }
 }

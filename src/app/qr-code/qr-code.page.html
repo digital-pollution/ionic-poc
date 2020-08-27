@@ -42,13 +42,12 @@
 
   </ion-card>
 
-  <ion-card *ngIf="scannedCode">
-
+  <ion-card>
     <ion-button expand="block" (click)="scanCode()" color="secondary">
       Scan Code
     </ion-button>
 
-    <ion-card-content>
+    <ion-card-content  *ngIf="scannedCode">
       Scan Result: {{ scannedCode }}
     </ion-card-content>
   </ion-card>

@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
@@ -16,6 +17,7 @@ import { Base64ToGallery } from '@ionic-native/base64-to-gallery/ngx';
   declarations: [AppComponent],
   entryComponents: [],
   imports: [
+    FormsModule,
     BrowserModule,
     IonicModule.forRoot(),
     AppRoutingModule

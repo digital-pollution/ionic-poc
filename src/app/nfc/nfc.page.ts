@@ -45,7 +45,11 @@ export class NfcPage implements OnInit {
     
     this.readerMode$ = this.nfc.readerMode(flags).subscribe(
         tag => this.nfcData = tag,
-        err => console.log('Error reading tag', err)
+        err => this.nfcData = err
     );
+
+    setTimeout(() => {
+      this.readerMode$.unsubscribe();
+    },30000);
   }
 }
