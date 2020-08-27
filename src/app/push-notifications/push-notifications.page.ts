@@ -9,8 +9,13 @@ const { LocalNotifications, Toast } = Plugins;
   styleUrls: ['./push-notifications.page.scss'],
 })
 export class PushNotificationsPage implements OnInit {
+  ntitle: string = 'You have been assigned';
+  nbody: string = 'Open application to review';
+  ndelay: number = 10000;
 
-  constructor() { }
+  constructor() {
+
+  }
 
   ngOnInit() {
   }
@@ -21,10 +26,10 @@ export class PushNotificationsPage implements OnInit {
     const notifs = await LocalNotifications.schedule({
       notifications: [
         {
-          title: "Hello From Demo App",
-          body: "Body",
+          title: this.ntitle,
+          body: this.nbody,
           id: 1,
-          schedule: { at: new Date(Date.now() + 1000 * 5) },
+          schedule: { at: new Date(Date.now() + this.ndelay * 5) },
           sound: null,
           attachments: null,
           actionTypeId: "",

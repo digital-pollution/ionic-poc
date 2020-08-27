@@ -13,7 +13,7 @@ declare let window: any;
   providers: [AndroidPermissions]
 })
 export class QrCodePage implements OnInit {
-  qrData = 'http://reddit.com';
+  qrData = 'Hello World';
   scannedCode = null;
   elementType: 'url' | 'canvas' | 'img' = 'canvas';
 
@@ -44,9 +44,6 @@ export class QrCodePage implements OnInit {
     const canvas = document.querySelector('canvas') as HTMLCanvasElement;
     const imageData = canvas.toDataURL('image/jpeg').toString();
     let data = imageData.split(',')[1];
-
-
-console.warn('downloadQR');
 
     this.base64ToGallery.base64ToGallery(
       data, 

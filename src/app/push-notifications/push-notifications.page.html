@@ -9,8 +9,38 @@
 
 <ion-content>
 
-  <ion-fab-button (click)="sendNotification()" style="display: block; margin: 24px auto;">
-    <ion-icon name="alert-circle"></ion-icon>
-  </ion-fab-button>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle>Create and Send Push Notifications</ion-card-subtitle>
+      <ion-card-title>Notifications</ion-card-title>
+    </ion-card-header>
 
+    <ion-card-content>
+      <ion-item>
+        <ion-label position="stacked">Notifcation title</ion-label>
+        <ion-input type="text" [(ngModel)]="ntitle"></ion-input>
+      </ion-item>
+    
+      <ion-item>
+        <ion-label position="stacked">Notifcation body</ion-label>
+        <ion-input type="text" [(ngModel)]="nbody"></ion-input>
+      </ion-item>
+    
+      <ion-item>
+        <ion-label position="stacked">Notifcation delay (ms)</ion-label>
+        <ion-input type="number" placeholder="placeholder" [(ngModel)]="ndelay"></ion-input>
+      </ion-item>
+
+    </ion-card-content>
+  </ion-card>
 </ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <br />
+    <ion-button (click)="sendNotification()" expand="block">
+      Send Notification
+    </ion-button>
+    <br />
+  </ion-toolbar>
+</ion-footer>

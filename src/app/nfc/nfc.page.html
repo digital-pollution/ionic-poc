@@ -9,12 +9,37 @@
 
 <ion-content>
 
-  <ion-fab-button (click)="onNfcWrite()" style="display: block; margin: 24px auto;">
-    <ion-icon name="add-circle"></ion-icon>
-  </ion-fab-button>
 
-  <ion-fab-button (click)="onNfcRead()" style="display: block; margin: 24px auto;">
-    <ion-icon name="barcode"></ion-icon>
-  </ion-fab-button>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle>Read and Write to NFC</ion-card-subtitle>
+      <ion-card-title>NFC Tools</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+
+      <ion-item>
+        <ion-label position="stacked">Send message to NFC</ion-label>
+        <ion-input placeholder="placeholder" [(ngModel)]="message"></ion-input>
+      </ion-item>
+
+      <br />
+
+      <ion-button (click)="onNfcWrite()" expand="block" color="success">
+        Write to NFC
+      </ion-button>
+
+      <br />
+
+      <ion-button (click)="onNfcRead()" expand="block" color="tertiary">
+        Read from NFC
+      </ion-button>
+    
+      <pre>{{ nfcData | json }}</pre>
+
+    </ion-card-content>
+  </ion-card>
+
+
 
 </ion-content>

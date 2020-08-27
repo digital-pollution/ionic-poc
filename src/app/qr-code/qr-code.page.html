@@ -26,32 +26,15 @@
         ></ion-input>
       </ion-item>
 
-      <br /><br />
-
-
-      <ion-label position="stacked">QR Code File Format</ion-label>
-      <ion-segment [(ngModel)]="elementType">
-        <ion-segment-button value="canvas">
-          <ion-label>canvas</ion-label>
-        </ion-segment-button>
-        <ion-segment-button value="img">
-          <ion-label>img</ion-label>
-        </ion-segment-button>
-        <ion-segment-button value="url">
-          <ion-label>url</ion-label>
-        </ion-segment-button>
-      </ion-segment>
-
-      <ion-button expand="full" (click)="scanCode()" color="secondary">
-        Scan Code
-      </ion-button>
-
       <ngx-qrcode 
         [elementType]="elementType" 
-        [value]="qrData">
+        [value]="qrData"
+        qrc-class="large-qr"
+        qrc-errorCorrectionLevel="L"
+      >
       </ngx-qrcode>
 
-      <ion-button expand="full" (click)="downloadQR()" color="tertiary" *ngIf="elementType === 'canvas'">
+      <ion-button expand="block" (click)="downloadQR()" color="tertiary" *ngIf="elementType === 'canvas'">
         Download QR Code
       </ion-button>
 
@@ -60,6 +43,11 @@
   </ion-card>
 
   <ion-card *ngIf="scannedCode">
+
+    <ion-button expand="block" (click)="scanCode()" color="secondary">
+      Scan Code
+    </ion-button>
+
     <ion-card-content>
       Scan Result: {{ scannedCode }}
     </ion-card-content>

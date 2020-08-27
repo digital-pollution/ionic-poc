@@ -6,10 +6,12 @@ import { ToastController } from '@ionic/angular';
   selector: 'app-nfc',
   templateUrl: './nfc.page.html',
   styleUrls: ['./nfc.page.scss'],
+  providers: [NFC, Ndef]
 })
 export class NfcPage implements OnInit {
   nfcData;
   readerMode$;
+  message;
 
   constructor(
     private nfc: NFC, 
@@ -21,20 +23,28 @@ export class NfcPage implements OnInit {
   ngOnInit() {
   }
 
-  onNfcWrite(nfcEvent) {
-    console.warn(nfcEvent);
-    
-    var message = [
-        this.ndef.textRecord('new nfc data!')
+  onNfcWrite() {
+    this.message = [
+        this.ndef.textRecord(this.message)
     ];
     
-    this.nfc.write(message);
+    this.nfc.write(this.message).then((res) => {
+
+    }).catch(async (error) => {
+      let toast = await this.toastController.create({
+        header: `Error getting location: ${error}`
+      })
+
+      toast.present();
+     });
+
   }
 
   onNfcRead() { 
     let flags = this.nfc.FLAG_READER_NFC_A | this.nfc.FLAG_READER_NFC_V;
+    
     this.readerMode$ = this.nfc.readerMode(flags).subscribe(
-        tag => console.log(JSON.stringify(tag)),
+        tag => this.nfcData = tag,
         err => console.log('Error reading tag', err)
     );
   }

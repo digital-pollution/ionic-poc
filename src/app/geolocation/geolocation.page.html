@@ -8,41 +8,57 @@
 </ion-header>
 
 <ion-content>
-  <div style="display: flex; margin: 24px 0; justify-content: space-evenly;">
-    <ion-fab-button>
-      <ion-icon name="play" (click)="startWatch()"></ion-icon>    
-    </ion-fab-button>
-    <ion-fab-button>
-      <ion-icon name="navigate-circle" (click)="getCurrentPosition()"></ion-icon>    
-    </ion-fab-button>
-    <ion-fab-button color="danger">
-      <ion-icon name="stop" (click)="stopWatch()"></ion-icon>    
-    </ion-fab-button>
-  </div>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle>Get the devices current location</ion-card-subtitle>
+      <ion-card-title>Get Current Position</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+
+      <ion-button (click)="getCurrentPosition()" color="primary" expand="block">
+        Get Position
+      </ion-button>
+
+      <ion-spinner name="bubbles" *ngIf="loadingCurrent" style="margin: 12px auto; display: block;"></ion-spinner>
+      <ion-item *ngIf="currentPos">
+        <pre>{{ currentPos | json }}</pre>
+      </ion-item>
+
+      <ion-button expand="block" *ngIf="currentPos"> 
+          Navigate Home
+      </ion-button>
+
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle>Watch and log the devices location</ion-card-subtitle>
+      <ion-card-title>Position History</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+
+      <ion-button (click)="startWatch()" color="primary" expand="block">
+        Start Tracking
+      </ion-button>
+
+      <ion-button (click)="stopWatch()" color="secondary" expand="block">
+        Stop Tracking
+      </ion-button>
+
+      <ion-spinner name="bubbles" *ngIf="loadingLog" style="margin: 12px auto; display: block;"></ion-spinner>
+
+      <ng-container *ngIf="posWatch">
+        <ion-item  *ngFor="let pos of posWatch">
+          <pre>{{ pos | json }}</pre>
+        </ion-item>
+      </ng-container>
 
 
-  <div *ngIf="currentPos">
-    <ion-label>Current Position:</ion-label>
-    <div>
-      <p><strong>lat: </strong> {{ currentPos.coords.latitude }}</p>
-      <p><strong>lng: </strong> {{ currentPos.coords.longitude }}</p>
-      <p><strong>accuracy: </strong> {{ currentPos.coords.accuracy }}</p>
-      <p><strong>timestamp: </strong> {{ currentPos.timestamp }}</p>
-  </div>
-  </div>
-
-  <ng-container *ngIf="posWatch">
-    <ion-label>Position History:</ion-label>
-    
-      <div *ngFor="let pos of posWatch">
-          <p><strong>lat: </strong> {{ pos.coords.latitude }}</p>
-          <p><strong>lng: </strong> {{ pos.coords.longitude }}</p>
-          <p><strong>accuracy: </strong> {{ pos.coords.accuracy }}</p>
-          <p><strong>timestamp: </strong> {{ pos.timestamp }}</p>
-      </div>
-      <hr />
-
-  </ng-container>
-
+    </ion-card-content>
+  </ion-card>
 
 </ion-content>
