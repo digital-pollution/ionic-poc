@@ -11,6 +11,7 @@ export class ListViewPage implements OnInit {
   shifts = [{
     id: '1',
     location: 'cucumber Office',
+    accepted: false,
     tasks: [
       {
         name: 'empty bins',
@@ -25,6 +26,7 @@ export class ListViewPage implements OnInit {
   {
     id: '2',
     location: 'Countdown Bayfair',
+    accepted: false,
     tasks: [
       {
         name: 'Mop floors',
@@ -35,6 +37,7 @@ export class ListViewPage implements OnInit {
   {
     id: '3',
     location: 'Library',
+    accepted: false,
     tasks: [
       {
         name: 'Clean windows',
@@ -45,6 +48,7 @@ export class ListViewPage implements OnInit {
   {
     id: '4',
     location: 'Cinema',
+    accepted: false,
     tasks: [
       {
         name: 'Clean Bathrooms',
@@ -55,6 +59,7 @@ export class ListViewPage implements OnInit {
   {
     id: '5',
     location: 'Our Place',
+    accepted: false,
     tasks: [
       {
         name: 'Eat Dumplings',
@@ -73,36 +78,35 @@ export class ListViewPage implements OnInit {
   ngOnInit() {
   }
 
-  async showActions(uuid: String) {
+  async showActions(shift: any) {
     const actionSheet = await this.actionSheetController.create({
-      header: 'Team Actions',
-      cssClass: 'my-custom-class',
+      header: shift.location,
       buttons: [
-        {
-          text: 'Start',
-          icon: 'play-circle',
-          handler: () => {
-            console.log('Start clicked');
-          }
-        },
-        {
-          text: 'Accept',
-          icon: 'checkmark-circle',
-          handler: () => {
-            console.log('Accept clicked');
-          }
-        },    
         {
           text: 'Delete',
           role: 'destructive',
-          icon: 'trash',
           handler: () => {
-            console.log('Delete clicked');
+            this.shifts = this.shifts.filter((i) => { 
+              return i.id != shift.id; 
+            });
           }
-        },         
+        },  
+        {
+          text: 'Info',
+          handler: () => {
+            this.presentModal(shift);
+          }
+        },    
+        {
+          text: 'Accept',
+          handler: () => {
+            shift.accepted = true;
+            const foundIndex = this.shifts.findIndex(i => i.id == shift.id);
+            this.shifts[foundIndex] = shift;
+          }
+        },    
         {
           text: 'Cancel',
-          icon: 'close',
           role: 'cancel',
           handler: () => {}
         }]
@@ -133,7 +137,7 @@ export class ListViewPage implements OnInit {
   `
 })
 export class ModalPage {
-  @Input() taskArray;
+  @Input() taskArray = [];
 
   constructor() {}
 }

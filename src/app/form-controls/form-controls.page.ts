@@ -6,10 +6,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./form-controls.page.scss'],
 })
 export class FormControlsPage implements OnInit {
+  currentTab: 'basic-elements' | 'range-sliders' | 'date-pickers' = 'basic-elements';
 
   constructor() { }
 
   ngOnInit() {
+  }
+
+  segmentChanged($event) {
+    this.currentTab = $event.detail.value;
   }
 
 }
