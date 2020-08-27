@@ -9,4 +9,60 @@
 
 <ion-content>
 
+  <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle>Create and Download a QR Code for testing</ion-card-subtitle>
+      <ion-card-title>QR Code</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+
+      <ion-item>
+        <ion-label position="stacked">QR Code Value</ion-label>
+        <ion-input
+          type="text"
+          placeholder="QR Code Data"
+          [(ngModel)]="qrData"
+        ></ion-input>
+      </ion-item>
+
+      <br /><br />
+
+
+      <ion-label position="stacked">QR Code File Format</ion-label>
+      <ion-segment [(ngModel)]="elementType">
+        <ion-segment-button value="canvas">
+          <ion-label>canvas</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="img">
+          <ion-label>img</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="url">
+          <ion-label>url</ion-label>
+        </ion-segment-button>
+      </ion-segment>
+
+      <ion-button expand="full" (click)="scanCode()" color="secondary">
+        Scan Code
+      </ion-button>
+
+      <ngx-qrcode 
+        [elementType]="elementType" 
+        [value]="qrData">
+      </ngx-qrcode>
+
+      <ion-button expand="full" (click)="downloadQR()" color="tertiary" *ngIf="elementType === 'canvas'">
+        Download QR Code
+      </ion-button>
+
+    </ion-card-content>
+
+  </ion-card>
+
+  <ion-card *ngIf="scannedCode">
+    <ion-card-content>
+      Scan Result: {{ scannedCode }}
+    </ion-card-content>
+  </ion-card>
+
 </ion-content>

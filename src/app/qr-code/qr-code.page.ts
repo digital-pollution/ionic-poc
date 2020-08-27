@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
+import { Base64ToGallery } from '@ionic-native/base64-to-gallery/ngx';
+import { ToastController } from '@ionic/angular';
+import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
 
 declare let window: any;
 
@@ -6,28 +10,54 @@ declare let window: any;
   selector: 'app-qr-code',
   templateUrl: './qr-code.page.html',
   styleUrls: ['./qr-code.page.scss'],
+  providers: [AndroidPermissions]
 })
 export class QrCodePage implements OnInit {
+  qrData = 'http://reddit.com';
+  scannedCode = null;
+  elementType: 'url' | 'canvas' | 'img' = 'canvas';
 
-  constructor() { }
+  constructor(
+    private barCodeScanner: BarcodeScanner,
+    private base64ToGallery: Base64ToGallery,
+    private toastController: ToastController,
+    private androidPermissions: AndroidPermissions
+  ) { }
 
   ngOnInit() {
+    this.androidPermissions.requestPermissions([
+      this.androidPermissions.PERMISSION.READ_EXTERNAL_STORAGE, 
+      this.androidPermissions.PERMISSION.WRITE_EXTERNAL_STORAGE
+    ]);
   }
 
   scanCode() {
-    try {
-      window.cordova.plugins.barcodeScanner.scan(
-        result => console.log(result),
-        err => console.error(err),
-        {
-          showTorchButton: true,
-          prompt: "Scan your code",
-          formats: "QR_CODE",
-          resultDisplayDuration: 0
-        }
-      );
-    } catch(e) {
-      console.error('an error occurred', e);
-    }
+    this.barCodeScanner.scan().then(
+      barcodeData => {
+        this.scannedCode = barcodeData;
+      }
+
+    )    
+  }
+
+  downloadQR() {
+    const canvas = document.querySelector('canvas') as HTMLCanvasElement;
+    const imageData = canvas.toDataURL('image/jpeg').toString();
+    let data = imageData.split(',')[1];
+
+
+console.warn('downloadQR');
+
+    this.base64ToGallery.base64ToGallery(
+      data, 
+      { prefix: 'img', mediaScanner: true }
+    ).then(async res => {
+      let toast = await this.toastController.create({
+        header: 'QR Code saved to Gallery'
+      })
+
+      toast.present();
+    }, err => console.error(err)
+    );
   }
 }
