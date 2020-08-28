@@ -47,6 +47,11 @@ export class AppComponent implements OnInit {
       title: 'Form Controls',
       url: '/form-controls',
       icon: 'warning'
+    },
+    {
+      title: 'Charts',
+      url: '/charts',
+      icon: 'warning'
     }
   ];
   public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];

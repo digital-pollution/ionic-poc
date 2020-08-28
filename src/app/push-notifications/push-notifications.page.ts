@@ -39,7 +39,7 @@ export class PushNotificationsPage implements OnInit {
     });
 
     await Toast.show({
-      text: 'notification sent!'
+      text: 'notification sent'
     });
 
     console.log('scheduled notifications', notifs);

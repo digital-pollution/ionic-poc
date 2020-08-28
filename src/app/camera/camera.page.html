@@ -8,14 +8,31 @@
 </ion-header>
 
 
-<ion-content>
+<ion-content class="ion-padding" scroll-y="false">
+  <ion-slides>
+    <ion-slide>
+      <div class="slide">
+        <img src="./assets/gallery.png" style="max-height: 300px;"/>
+        <h2>Image Gallery</h2>
+        <p>
+          Use the camera to add images to a gallery.<br /> 
+          <small>note: images can be retrieved in the device gallery directory.</small>
+        </p>
+        <p>
+          To scroll the Image gallery swipe left or right.
+        </p>
+      </div>
+    </ion-slide>
+    <ion-slide *ngFor="let item of gallery">
+      <div class="slide">
+        <img [src]="domSanitizer.bypassSecurityTrustUrl(item.webPath)"/>
+      </div>
+    </ion-slide>
+  </ion-slides>
+</ion-content>
 
+<ion-footer>
   <ion-fab-button (click)="takePicture()" style="display: block; margin: 24px auto;">
     <ion-icon name="camera"></ion-icon>
   </ion-fab-button>
-
-  <div *ngIf="imageUrl">
-    <img [src]="domSanitizer.bypassSecurityTrustUrl(imageUrl)" style="max-height: 200px; max-width: 200px; margin: 24px auto" />
-  </div>
-
-</ion-content>
+</ion-footer>

@@ -12,11 +12,12 @@ export class NfcPage implements OnInit {
   nfcData;
   readerMode$;
   message;
+  isReaderOpen = false;
 
   constructor(
     private nfc: NFC, 
     private ndef: Ndef,
-    private toastController: ToastController,
+    private toastController: ToastController
   ) { }
 
 
@@ -32,7 +33,12 @@ export class NfcPage implements OnInit {
 
     }).catch(async (error) => {
       let toast = await this.toastController.create({
-        header: `Error getting location: ${error}`
+        header: `Error Writing Data: ${error}`,
+        buttons: [{
+          role: 'cancel',
+          side: 'end',
+          icon: 'close-circle-outline'
+        }]
       })
 
       toast.present();
@@ -42,14 +48,45 @@ export class NfcPage implements OnInit {
 
   onNfcRead() { 
     let flags = this.nfc.FLAG_READER_NFC_A | this.nfc.FLAG_READER_NFC_V;
+    let toast; 
     
+    this.isReaderOpen = true;
+
     this.readerMode$ = this.nfc.readerMode(flags).subscribe(
-        tag => this.nfcData = tag,
-        err => this.nfcData = err
+        async (tag) => {
+          this.nfcData = tag;
+
+          toast = await this.toastController.create({
+            header: `Succesfully Retrieved Data`,
+            buttons: [{
+              role: 'cancel',
+              side: 'end',
+              icon: 'close-circle-outline'
+            }]
+          })
+
+          toast.present();
+        },
+        async (err) => {
+          this.nfcData = err
+
+          toast = await this.toastController.create({
+            header: `Error Retrieving Data: ${err}`,
+            buttons: [{
+              role: 'cancel',
+              side: 'end',
+              icon: 'close-circle-outline'
+            }]
+          })
+
+          toast.present();
+        }
     );
 
+
     setTimeout(() => {
+      this.isReaderOpen = false;
       this.readerMode$.unsubscribe();
-    },30000);
+    }, 5000);
   }
 }

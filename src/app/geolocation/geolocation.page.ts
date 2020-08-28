@@ -43,7 +43,12 @@ export class GeolocationPage implements OnInit {
       this.loadingCurrent = false;
      }).catch(async (error) => {
       let toast = await this.toastController.create({
-        header: `Error getting location: ${error}`
+        header: `Error getting location: ${error}`,
+        buttons: [{
+          role: 'cancel',
+          side: 'end',
+          icon: 'close-circle-outline'
+        }]
       })
 
       toast.present();
@@ -74,12 +79,22 @@ export class GeolocationPage implements OnInit {
 
         toast = await this.toastController.create({
           header: `Log Updated`,
-          duration: 200
+          duration: 200,
+          buttons: [{
+            role: 'cancel',
+            side: 'end',
+            icon: 'close-circle-outline'
+          }]
         })
       } else {
         toast = await this.toastController.create({
           header: `Error getting location: ${err}`,
-          duration: 5000
+          duration: 5000,
+          buttons: [{
+            role: 'cancel',
+            side: 'end',
+            icon: 'close-circle-outline'
+          }]
         })
       }
 

@@ -50,8 +50,13 @@ export class QrCodePage implements OnInit {
       { prefix: 'img', mediaScanner: true }
     ).then(async res => {
       let toast = await this.toastController.create({
-        header: 'QR Code saved to Gallery'
-      })
+        header: 'QR Code saved to Gallery',
+        buttons: [{
+          role: 'cancel',
+          side: 'end',
+          icon: 'close-circle-outline'
+        }]
+      });
 
       toast.present();
     }, err => console.error(err)

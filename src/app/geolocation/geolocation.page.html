@@ -26,9 +26,12 @@
         <pre>{{ currentPos | json }}</pre>
       </ion-item>
 
-      <ion-button expand="block" *ngIf="currentPos"> 
-          Navigate Home
-      </ion-button>
+      <ion-button 
+        expand="block" 
+        *ngIf="currentPos" 
+        target="_blank" 
+        href="https://www.google.com/maps/dir/?api=1&destination=Our+Place+Tauranga&travelmode=driving"
+      >Navigate to beer</ion-button>
 
     </ion-card-content>
   </ion-card>

@@ -34,6 +34,10 @@ const routes: Routes = [
   {
     path: 'form-controls',
     loadChildren: () => import('./form-controls/form-controls.module').then( m => m.FormControlsPageModule)
+  },
+  {
+    path: 'charts',
+    loadChildren: () => import('./charts/charts.module').then( m => m.ChartsPageModule)
   }
 ];
 

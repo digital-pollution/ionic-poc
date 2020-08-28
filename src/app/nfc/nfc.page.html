@@ -12,29 +12,38 @@
 
   <ion-card>
     <ion-card-header>
-      <ion-card-subtitle>Read and Write to NFC</ion-card-subtitle>
-      <ion-card-title>NFC Tools</ion-card-title>
+      <ion-card-subtitle>Read common NFC chips</ion-card-subtitle>
+      <ion-card-title>NFC Reader</ion-card-title>
     </ion-card-header>
 
     <ion-card-content>
+      <!--
+        <ion-item>
+          <ion-label position="stacked">Send message to NFC</ion-label>
+          <ion-input placeholder="placeholder" [(ngModel)]="message"></ion-input>
+        </ion-item>
 
-      <ion-item>
-        <ion-label position="stacked">Send message to NFC</ion-label>
-        <ion-input placeholder="placeholder" [(ngModel)]="message"></ion-input>
-      </ion-item>
+        <br />
+
+        <ion-button (click)="onNfcWrite()" expand="block" color="success">
+          Write to NFC
+        </ion-button> 
+      -->
 
       <br />
 
-      <ion-button (click)="onNfcWrite()" expand="block" color="success">
-        Write to NFC
-      </ion-button>
-
-      <br />
-
-      <ion-button (click)="onNfcRead()" expand="block" color="tertiary">
+      <ion-button (click)="onNfcRead()" expand="block" color="tertiary" [disabled]="isReaderOpen">
         Read from NFC
       </ion-button>
-    
+
+      <ng-container *ngIf="isReaderOpen">
+        <br/><br/>
+        <ion-progress-bar type="indeterminate"></ion-progress-bar>
+        <small style="margin: 6px auto; display: block;">SCAN TAG NOW</small>
+      </ng-container>
+
+      <br/><br/>
+      <ion-title>Result: </ion-title>
       <pre>{{ nfcData | json }}</pre>
 
     </ion-card-content>

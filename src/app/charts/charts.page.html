@@ -1,0 +1,39 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Charts</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle>Charts Powered by d3</ion-card-subtitle>
+      <ion-card-title>Streaming Chart Example</ion-card-title>
+    </ion-card-header>
+  
+    <ion-card-content>
+
+      <div id="chartContainer" style="max-height: 40vh">
+        <app-donut-chart #ordersByStatusChart [data]="chartData"></app-donut-chart>
+      </div>
+
+      <ion-item lines="full">
+        <ion-label>Show raw data</ion-label>
+        <ion-toggle [(ngModel)]="showData" (ionChange)="toggleData($event)" slot="end"></ion-toggle>
+      </ion-item>
+
+      <div *ngIf="showData">
+        <pre>{{ orderStates | json }}</pre>
+      </div>
+
+      <br />
+      <br />
+
+    </ion-card-content>
+  </ion-card>
+  
+</ion-content>
