@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, AfterViewInit } from '@angular/core';
 import { ActionSheetController, ModalController } from '@ionic/angular';
 
 @Component({
@@ -114,11 +114,13 @@ export class ListViewPage implements OnInit {
     await actionSheet.present();
   }
 
-  async presentModal(taskArray) {
+  async presentModal(job) {
     const modal = await this.modalController.create({
       component: ModalPage,
       cssClass: 'tasks',
-      componentProps: taskArray
+      componentProps: {
+        'job': job
+      }
     });
     return await modal.present();
   }
@@ -128,16 +130,45 @@ export class ListViewPage implements OnInit {
 @Component({
   selector: 'modal-page',
   template: `
-    <ion-list>
-      <ion-item lines="none" lines="full" *ngFor="let task of taskArray">
-        <strong>{{ task.name }}</strong><br> 
-        <small>{{ task.description }}</small>
-      </ion-item>    
+    <ion-header translucent>
+    <ion-toolbar>
+      <ion-title>{{job.location}}</ion-title>
+      <ion-buttons slot="end">
+        <ion-button (click)="dismissModal()">Close</ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content fullscreen>
+
+    <ion-item lines="none">
+      <ion-title>Tasks: </ion-title>
+    </ion-item>
+
+    <ion-list *ngIf="job">
+
+      <ion-item lines="full" *ngFor="let task of job.tasks">
+        <ion-text>
+          <br />
+          <ion-title>{{ task.name }}</ion-title>
+          <p>{{ task.description }}</p>
+        </ion-text>
+      </ion-item >
+      
     </ion-list>
+
+  </ion-content>
   `
 })
-export class ModalPage {
-  @Input() taskArray = [];
+export class ModalPage implements AfterViewInit {
+  @Input() job: any;
 
-  constructor() {}
+  constructor(
+    private modalCtrl: ModalController
+  ) {}
+
+  ngAfterViewInit() {}
+
+  dismissModal() {
+    this.modalCtrl.dismiss();
+  }
 }

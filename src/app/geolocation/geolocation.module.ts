@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { BrowserModule } from '@angular/platform-browser';
 
 import { IonicModule } from '@ionic/angular';
 
@@ -13,7 +14,8 @@ import { GeolocationPage } from './geolocation.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    GeolocationPageRoutingModule
+    GeolocationPageRoutingModule,
+    BrowserModule
   ],
   declarations: [GeolocationPage]
 })

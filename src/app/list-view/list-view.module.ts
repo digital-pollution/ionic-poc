@@ -1,12 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-
 import { IonicModule } from '@ionic/angular';
-
 import { ListViewPageRoutingModule } from './list-view-routing.module';
 
-import { ListViewPage } from './list-view.page';
+import { ListViewPage, ModalPage } from './list-view.page';
 
 @NgModule({
   imports: [
@@ -15,6 +13,6 @@ import { ListViewPage } from './list-view.page';
     IonicModule,
     ListViewPageRoutingModule
   ],
-  declarations: [ListViewPage]
+  declarations: [ListViewPage, ModalPage]
 })
 export class ListViewPageModule {}
