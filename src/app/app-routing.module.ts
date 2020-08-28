@@ -38,6 +38,10 @@ const routes: Routes = [
   {
     path: 'charts',
     loadChildren: () => import('./charts/charts.module').then( m => m.ChartsPageModule)
+  },
+  {
+    path: 'network',
+    loadChildren: () => import('./network/network.module').then( m => m.NetworkPageModule)
   }
 ];
 

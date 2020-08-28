@@ -52,6 +52,11 @@ export class AppComponent implements OnInit {
       title: 'Charts',
       url: '/charts',
       icon: 'warning'
+    },
+    {
+      title: 'Network',
+      url: '/network',
+      icon: 'warning'
     }
   ];
   public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];

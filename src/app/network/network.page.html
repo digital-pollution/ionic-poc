@@ -1,0 +1,10 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>network</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <pre>{{  currentStatus | json }}</pre>
+  <button (click)="getStatus()">get status</button>
+</ion-content>
