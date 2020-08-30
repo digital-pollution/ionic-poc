@@ -1,10 +1,29 @@
-<ion-header>
+<ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>network</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Network Detection</ion-title>
   </ion-toolbar>
 </ion-header>
-
 <ion-content>
-  <pre>{{  currentStatus | json }}</pre>
-  <button (click)="getStatus()">get status</button>
+
+  <ion-card>
+
+    <ion-card-header>
+      <ion-card-subtitle>Get the network Status</ion-card-subtitle>
+      <ion-card-title>Network Status Detection</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <br /><br />
+      <ion-button expand="block" (click)="getStatus()">get status</ion-button>
+      <br /><br />
+      <pre>{{  currentStatus | json }}</pre>
+      <br /><br />
+    </ion-card-content>
+
+  </ion-card>
+
+
 </ion-content>

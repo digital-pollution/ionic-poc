@@ -18,18 +18,19 @@ export class NetworkPage implements OnInit, OnDestroy {
     this.startListeningToNetwork();
   }
 
-  ngOnDestroy() {}
+  ngOnDestroy() {
+    Network.removeAllListeners();
+  }
 
   startListeningToNetwork() {
     this.statusHandler = Network.addListener('networkStatusChange', (status) => {
-      console.log("Network status changed", status);
+      console.warn('networkStatusChange', status);
       this.currentStatus = status;
     });
   }
 
   async getStatus() {
     this.currentStatus = await Network.getStatus();
-    console.warn(status)
   }
 
 }

@@ -48,7 +48,8 @@
     </ion-button>
 
     <ion-card-content  *ngIf="scannedCode">
-      Scan Result: {{ scannedCode }}
+      <label>Scan Result:</label>
+      <pre>{{ scannedCode | json }}</pre>
     </ion-card-content>
   </ion-card>
 
